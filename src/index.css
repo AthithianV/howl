@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer{
+    .flex-center{
+        @apply flex justify-center items-center;
+    }
+
+    .logo-font{
+        font-family: "Gugi", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
