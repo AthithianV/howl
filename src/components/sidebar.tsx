@@ -1,33 +1,47 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-import homeIcon from "../assets/icons/home.svg";
-import chatIcon from "../assets/icons/chat.svg";
-import groupIcon from "../assets/icons/group.svg";
-import profileIcon from "../assets/icons/profile.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faPaperPlane, faPowerOff, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
-const links = [
+const topLinks = [
     {
         name: "Home",
-        to: "/home",
-        icon: homeIcon
+        to: "/",
+        icon: faHome
     },
     {
         name: "Chat",
         to: "/chat",
-        icon: chatIcon
+        icon: faPaperPlane
     },
     {
-        name: "Packs",
-        to: "/packs",
-        icon: groupIcon
+        name: "Groups",
+        to: "/groups",
+        icon: faUserGroup
     }
 ];
 
+const bottomLinks = [
+    {
+        name: "Profile",
+        to: "/profile",
+        icon: faUser
+    },
+    {
+        name: "SignOut",
+        to: "/signout",
+        icon: faPowerOff
+    }
+]
+
 const Sidebar = () => {
+
+    const location = useLocation();
+
   return (
     <nav className='h-full bg-slate-200 flex flex-col justify-between p-2'>
         <div>
-            <div className="flex items-center gap-2 my-5 px-16">
+            <div className="flex items-center gap-2 my-5 px-12 border-b-[0.5px] border-white pb-4">
                 <div className="rounded-full">
                     <img src={"/howl.svg"} alt={"logo"} className="h-10 w-10 overflow-hidden rounded-full"/>
                 </div>
@@ -38,10 +52,10 @@ const Sidebar = () => {
             
             <ul>
                 {
-                    links.map((link)=>(
+                    topLinks.map((link)=>(
                         <li>
-                            <Link to={link.to} className="flex items-center text-xl font-semibold my-2 gap-2 py-2 px-16 hover:bg-slate-400 rounded">
-                                <img src={link.icon} alt={link.name} className="h-8 w-8"/>
+                            <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
+                                <FontAwesomeIcon icon={link.icon}/>
                                 {link.name}
                             </Link>
                         </li>)
@@ -50,10 +64,18 @@ const Sidebar = () => {
             </ul>
         </div>
         <div className="my-5 py-2 border-t-2 border-white rounded">
-            <Link to="/profile" className="flex gap-2 py-4 px-16 text-xl font-semibold items-center hover:bg-slate-400 rounded">
-                <img src={profileIcon} alt={"profile"} className="h-6 w-6"/>
-                Profile
-            </Link>
+            <ul>
+                {
+                    bottomLinks.map((link)=>(
+                        <li>
+                            <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
+                                <FontAwesomeIcon icon={link.icon}/>
+                                {link.name}
+                            </Link>
+                        </li>)
+                    )
+                }
+            </ul>
         </div>
         
     </nav>
