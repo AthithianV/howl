@@ -1,6 +1,9 @@
 import { lazy, Suspense } from 'react';
-import Sidebar from './components/sidebar'
 import { Route, Routes } from 'react-router-dom';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
+import MainLayout from './components/MainLayout';
+import AuthLayout from './components/AuthLayout';
 
 function App() {
 
@@ -10,20 +13,25 @@ function App() {
   const Profile = lazy(() => import('./pages/Profile'));
   const NoMatch = lazy(() => import('./components/NoMatch'));
 
+
+
   return (
     <div className='h-screen w-screen flex'>
-      <Sidebar />
-      <div className='flex-1 bg-sky-50'>
-        <Suspense fallback={<div className="container">Loading...</div>}>
-            <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/chat" element={<Chat />} />
-               <Route path="/groups" element={<Groups />} />
-               <Route path="/profile/:id" element={<Profile />} />
-               <Route path="*" element={<NoMatch />} />
-            </Routes>
-         </Suspense>
-      </div>
+      <Suspense fallback={<div className="container">Loading...</div>}>
+          <Routes>
+              <Route path="/auth" element={<AuthLayout/>}>
+                  <Route path={"signup"} element={<SignUp />} />
+                  <Route path="login" element={<LogIn />} />
+              </Route>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="chat" element={<Chat />} />
+                <Route path="groups" element={<Groups />} />
+                <Route path="profile" element={<Profile />} />
+              </Route>
+              <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </Suspense>
     </div>
   )
 }

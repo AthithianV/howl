@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPaperPlane, faPowerOff, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import Brand from "./Brand";
 
 const topLinks = [
     {
@@ -41,15 +42,7 @@ const Sidebar = () => {
   return (
     <nav className='h-full bg-slate-200 flex flex-col justify-between p-2'>
         <div>
-            <div className="flex items-center gap-2 my-5 px-12 border-b-[0.5px] border-white pb-4">
-                <div className="rounded-full">
-                    <img src={"/howl.svg"} alt={"logo"} className="h-10 w-10 overflow-hidden rounded-full"/>
-                </div>
-                <h1 className="text-center logo-font text-2xl font-semibold">
-                    HOWL
-                </h1>
-            </div>
-            
+            <Brand/>
             <ul>
                 {
                     topLinks.map((link)=>(
