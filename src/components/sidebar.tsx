@@ -45,8 +45,8 @@ const Sidebar = () => {
             <Brand/>
             <ul>
                 {
-                    topLinks.map((link)=>(
-                        <li>
+                    topLinks.map((link, index)=>(
+                        <li key={index}>
                             <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
                                 {link.name}
@@ -59,8 +59,8 @@ const Sidebar = () => {
         <div className="my-5 py-2 border-t-2 border-white rounded">
             <ul>
                 {
-                    bottomLinks.map((link)=>(
-                        <li>
+                    bottomLinks.map((link, index)=>(
+                        <li key={index}>
                             <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
                                 {link.name}

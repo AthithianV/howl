@@ -52,7 +52,7 @@ const SignUp = () => {
   } 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col py-12 px-24 shadow-lg rounded-lg">
+    <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col py-12 px-24 shadow-lg rounded-lg bg-white">
       <Brand/>
       {!errors.root?.message && success && <SuccessMessage message={success}/>}
       {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
