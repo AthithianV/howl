@@ -1,17 +1,28 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
+import {ThreeDots} from "react-loader-spinner";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { FirebaseError } from "firebase/app";
 
 import { SignUpSchema } from "../validation/signup";
-import FormElementWrapper from "../components/FormElementWrapper";
+import FormElementWrapper from "../components/ui/FormElementWrapper";
 import Brand from "../components/Brand";
 import googleIcon from "../assets/icons/google.svg";
-import { Link } from "react-router-dom";
+import SuccessMessage from "../components/ui/SuccessMessage";
+import ErrorMessage from "../components/ui/ErrorMessage";
+import { signupWithEmailPassword } from "../database/users/auth";
 
 
 const SignUp = () => {
 
-  const { register, handleSubmit, formState: {errors} } = useForm({
+  const [success, setSuccess] = useState<null|string>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+
+  const { register, handleSubmit, formState: {errors}, setError } = useForm({
     defaultValues:{
       username: "",
       email: "",
@@ -20,13 +31,31 @@ const SignUp = () => {
     resolver: zodResolver(SignUpSchema)
   });
 
-  const onSubmit = (data:z.infer<typeof SignUpSchema>)=>{
-    console.log(data);
+  const onSubmit = async (data:z.infer<typeof SignUpSchema>)=>{
+    try {
+      setLoading(true);
+      await signupWithEmailPassword(data.username, data.email, data.password);
+      setSuccess("Sign Up Successfully!!!");
+      navigate("/auth/signup");
+    } catch (error) {
+      if(error instanceof FirebaseError){
+        if(error.code==="auth/email-already-in-use"){
+          setError("root", {message: "EmailID is already in use. Try Different EmailID"})
+        }
+        
+      }else{
+        setError("root", {message: "Something Went Wrong!"});
+      }
+    }finally{
+      setLoading(false);
+    }
   } 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col py-12 px-24 shadow-lg rounded-lg">
       <Brand/>
+      {!errors.root?.message && success && <SuccessMessage message={success}/>}
+      {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
       <FormElementWrapper label="Username" error={errors.username}>
         <input 
           type="text" 
@@ -48,7 +77,20 @@ const SignUp = () => {
           {...register("password", {required: {value: true, message: "Password is Required"}})}/>
       </FormElementWrapper>
 
-      <button type="submit" className="bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">Sign up</button>
+      <button type="submit" disabled={loading} className="flex-center gap-2 bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">
+        {loading
+        ?<ThreeDots
+        visible={true}
+        height="30"
+        width="30"
+        color="white"
+        radius="5"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />
+        :<span>Sign up</span>}
+      </button>
 
       <div className="text-sm">Already Have Account? <Link to="/auth/login" className="text-blue-500 underline">Login</Link></div>
 

@@ -2,8 +2,8 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
-import MainLayout from './components/MainLayout';
-import AuthLayout from './components/AuthLayout';
+import MainLayout from './components/Layout/MainLayout';
+import AuthLayout from './components/Layout/AuthLayout';
 
 function App() {
 

@@ -20,6 +20,6 @@
   }
 
   .input{
-    @apply w-full border border-black py-2 px-3 my-1 rounded focus:outline-sky-400 focus:text-sky-400 disabled:border-gray-400 disabled:bg-gray-100
+    @apply w-80 rounded focus:outline-sky-400 focus:text-sky-400 disabled:border-gray-400 disabled:bg-gray-100
   }
 }

@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { SignUpSchema } from "../validation/signup";
-import FormElementWrapper from "../components/FormElementWrapper";
+import FormElementWrapper from "../components/ui/FormElementWrapper";
 import Brand from "../components/Brand";
 import googleIcon from "../assets/icons/google.svg";
 import { Link } from "react-router-dom";
