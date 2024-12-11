@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import db, { app } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { UserType } from "../../types/user";
 
 const auth = getAuth(app);
 export const signupWithEmailPassword = async (username: string, email:string, password: string) =>{
@@ -8,6 +9,22 @@ export const signupWithEmailPassword = async (username: string, email:string, pa
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
         const user = {userId: userRecord.user.uid, username, email};
         await addDoc(collection(db, 'users'), user);
+    } catch (error) {
+        throw error;    
+    }
+}
+
+export const loginWithEmailPassword = async ( email:string, password: string) =>{
+    try {
+        const userRecord = await signInWithEmailAndPassword(auth, email, password);
+        let user:UserType|null = null;
+        const docsSnap = await getDocs(query(collection(db, 'users'), where("userId", "==", userRecord.user.uid)));
+        if(!docsSnap.empty){
+            docsSnap.forEach(doc=>{
+                user = doc.data() as UserType;
+            })
+        }
+        return user;
     } catch (error) {
         console.log(error);
         

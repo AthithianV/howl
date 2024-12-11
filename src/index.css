@@ -19,7 +19,11 @@
     @apply flex gap-2 py-3 px-16 text-xl font-semibold items-center hover:bg-slate-300 hover:text-sky-300 rounded;
   }
 
-  .input{
-    @apply w-80 rounded focus:outline-sky-400 focus:text-sky-400 disabled:border-gray-400 disabled:bg-gray-100
+  .input {
+    @apply w-80 rounded focus:outline-sky-400 focus:text-sky-400 disabled:border-gray-400 disabled:bg-gray-100;
+  }
+
+  .bg-gradient {
+    @apply bg-gradient-to-b from-indigo-400 via-sky-400 to-emerald-400;
   }
 }
