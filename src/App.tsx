@@ -1,16 +1,18 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import SignUp from './pages/SignUp';
-import LogIn from './pages/LogIn';
+import SignUp from './pages/Auth/SignUp';
+import LogIn from './pages/Auth/LogIn';
 import MainLayout from './components/Layout/MainLayout';
 import AuthLayout from './components/Layout/AuthLayout';
+import CreateProfile from './pages/Profile/CreateProfile';
+import ProfileLayout from './components/Layout/ProfileLayout';
 
 function App() {
 
-  const Home = lazy(() => import('./pages/Home'));
-  const Chat = lazy(() => import('./pages/Chat'));
-  const Groups = lazy(() => import('./pages/Groups'));
-  const Profile = lazy(() => import('./pages/Profile'));
+  const Home = lazy(() => import('./pages/Home/Home'));
+  const Chat = lazy(() => import('./pages/Chat/Chat'));
+  const Groups = lazy(() => import('./pages/Group/Groups'));
+  const Profile = lazy(() => import('./pages/Profile/Profile'));
   const NoMatch = lazy(() => import('./components/NoMatch'));
 
 
@@ -27,7 +29,10 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="chat" element={<Chat />} />
                 <Route path="groups" element={<Groups />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="/profile" element={<ProfileLayout/>}>
+                  <Route index element={<Profile/>}/>
+                  <Route path="create-profile" element={<CreateProfile />} />
+                </Route>
               </Route>
               <Route path="*" element={<NoMatch />} />
           </Routes>

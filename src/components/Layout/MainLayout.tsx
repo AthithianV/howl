@@ -23,7 +23,7 @@ function MainLayout() {
   return (
     <div className="h-screen w-screen flex">
       <Sidebar />
-      <div className="flex-1 bg-sky-50">
+      <div className="flex-1 bg-slate-50">
         <Outlet />
       </div>
     </div>

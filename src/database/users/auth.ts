@@ -7,7 +7,7 @@ const auth = getAuth(app);
 export const signupWithEmailPassword = async (username: string, email:string, password: string) =>{
     try {
         const userRecord = await createUserWithEmailAndPassword(auth, email, password);
-        const user = {userId: userRecord.user.uid, username, email};
+        const user = {userId: userRecord.user.uid, username, email, hasProfile: false};
         await addDoc(collection(db, 'users'), user);
     } catch (error) {
         throw error;    

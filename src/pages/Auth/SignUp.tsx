@@ -1,61 +1,50 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from "react";
+import {ThreeDots} from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
+import { useState } from "react";
 import { FirebaseError } from "firebase/app";
-import Cookies from "js-cookie";
 
-import FormElementWrapper from "../components/ui/FormElementWrapper";
-import Brand from "../components/Brand";
+import { SignUpSchema } from "../../validation/signup";
+import FormElementWrapper from "../../components/ui/FormElementWrapper";
+import Brand from "../../components/Brand";
 import googleIcon from "../assets/icons/google.svg";
-import { LogInSchema } from "../validation/login";
-import { loginWithEmailPassword } from "../database/users/auth";
-import SuccessMessage from "../components/ui/SuccessMessage";
-import ErrorMessage from "../components/ui/ErrorMessage";
-import useUser from "../store/userStore";
+import SuccessMessage from "../../components/ui/SuccessMessage";
+import ErrorMessage from "../../components/ui/ErrorMessage";
+import { signupWithEmailPassword } from "../../database/users/auth";
 
 
-const LogIn = () => {
-
-  const {setUser} = useUser();
+const SignUp = () => {
 
   const [success, setSuccess] = useState<null|string>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [loginCompleted, setLoginCompleted] = useState(false);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, setError, formState: {errors} } = useForm({
+
+  const { register, handleSubmit, formState: {errors}, setError } = useForm({
     defaultValues:{
+      username: "",
       email: "",
       password: ""
     },
-    resolver: zodResolver(LogInSchema)
+    resolver: zodResolver(SignUpSchema)
   });
 
-  useEffect(()=>{
-    if(loginCompleted){
-      navigate("/");
-      setLoginCompleted(false);
-    }
-  }, [loginCompleted]);
-
-  const onSubmit = async (data:z.infer<typeof LogInSchema>)=>{
-    setLoading(true);
+  const onSubmit = async (data:z.infer<typeof SignUpSchema>)=>{
     try {
-      const user = await loginWithEmailPassword(data.email, data.password);
-      setUser(user);
-      Cookies.set("user", JSON.stringify(user), {expires: 1});
-      setSuccess("Login Successfull"); 
-      setLoginCompleted(true);
+      setLoading(true);
+      await signupWithEmailPassword(data.username, data.email, data.password);
+      setSuccess("Sign Up Successfully!!!");
+      navigate("/auth/signup");
     } catch (error) {
       if(error instanceof FirebaseError){
-        if(error.code === "auth/invalid-credential"){
-          setError("root", {message: "Wrong Email or Password"});
+        if(error.code==="auth/email-already-in-use"){
+          setError("root", {message: "EmailID is already in use. Try Different EmailID"})
         }
+        
       }else{
-        setError("root", {message: "Something Went Wrong"})
+        setError("root", {message: "Something Went Wrong!"});
       }
     }finally{
       setLoading(false);
@@ -65,9 +54,14 @@ const LogIn = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col p-12 shadow-lg rounded-lg bg-white">
       <Brand/>
-
       {!errors.root?.message && success && <SuccessMessage message={success}/>}
       {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
+      <FormElementWrapper label="Username" error={errors.username}>
+        <input 
+          type="text" 
+          className={`input border border-black py-1 px-3 my-1 peer ${errors.username?'border-red-500':""}`}
+          {...register("username", {required: {value: true, message: "Username is Required"}})}/>
+      </FormElementWrapper>
 
       <FormElementWrapper label="Email" error={errors.email}>
         <input
@@ -83,7 +77,7 @@ const LogIn = () => {
           {...register("password", {required: {value: true, message: "Password is Required"}})}/>
       </FormElementWrapper>
 
-      <button type="submit" disabled={loading} className="flex-center gap-2 bg-sky-400 my-2 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">
+      <button type="submit" disabled={loading} className="flex-center gap-2 bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">
         {loading
         ?<ThreeDots
         visible={true}
@@ -95,7 +89,7 @@ const LogIn = () => {
         wrapperStyle={{}}
         wrapperClass=""
         />
-        :<span>Log In</span>}
+        :<span>Sign up</span>}
       </button>
 
       {/* <div className="my-2 p-4 border-t-2 border-gray-300 w-full text-center">
@@ -105,9 +99,10 @@ const LogIn = () => {
         </div>
       </div> */}
 
-      <div className="text-sm my-2">Do not Have Account? <Link to="/auth/signup" className="text-blue-500 underline">Sign Up</Link></div>
+      <div className="text-sm my-2">Already Have Account? <Link to="/auth/login" className="text-blue-500 underline">Login</Link></div>
+    
     </form>
   )
 }
 
-export default LogIn
+export default SignUp;
