@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import db, { app } from "../firebase";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { UserType } from "../../types/user";
@@ -31,3 +31,9 @@ export const loginWithEmailPassword = async ( email:string, password: string) =>
         throw error;    
     }
 }
+
+export const signOutInt = async () =>{
+    signOut(auth).catch((error) => {
+        throw new Error("Error Occured while signing out!!!");
+    });
+} 

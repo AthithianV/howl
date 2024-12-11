@@ -98,14 +98,14 @@ const LogIn = () => {
         :<span>Log In</span>}
       </button>
 
-      <div className="my-2 p-4 border-t-2 border-gray-300 w-full text-center">
+      {/* <div className="my-2 p-4 border-t-2 border-gray-300 w-full text-center">
         <div className="shadow-md px-4 py-2 rounded-full border-2 border-black flex-center gap-1 cursor-pointer active:bg-black active:text-white">
           <div className="bg-white p-1 rounded-full"><img src={googleIcon} alt="Google Logo" className="h-5 w-5"/></div> 
           <span>Sign in with Google</span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="text-sm">Do not Have Account? <Link to="/auth/signup" className="text-blue-500 underline">Sign Up</Link></div>
+      <div className="text-sm my-2">Do not Have Account? <Link to="/auth/signup" className="text-blue-500 underline">Sign Up</Link></div>
     </form>
   )
 }
