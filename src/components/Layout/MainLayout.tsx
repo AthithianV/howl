@@ -14,14 +14,18 @@ function MainLayout() {
 
   useEffect(()=>{
     if(user){
-      setUser(JSON.parse(user));
+      const userInfo = JSON.parse(user);
+      setUser(userInfo);
+      if(!userInfo.hasProfile){
+        navigate("/profile/create-profile");
+      }
     }else{
       navigate("/auth/login");
     }
   }, [])
 
   return (
-    <div className="h-screen w-screen flex">
+    <div className="h-screen w-screen flex-center overflow-auto">
       <Sidebar />
       <div className="flex-1 bg-slate-50">
         <Outlet />
