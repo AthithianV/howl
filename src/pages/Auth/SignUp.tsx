@@ -52,7 +52,7 @@ const SignUp = () => {
   } 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col p-12 shadow-lg rounded-lg bg-white">
+    <form onSubmit={()=>handleSubmit(onSubmit)} className="text-lg flex-center flex-col p-12 shadow-lg rounded-lg bg-white">
       <Brand/>
       {!errors.root?.message && success && <SuccessMessage message={success}/>}
       {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
@@ -77,7 +77,10 @@ const SignUp = () => {
           {...register("password", {required: {value: true, message: "Password is Required"}})}/>
       </FormElementWrapper>
 
-      <button type="submit" disabled={loading} className="flex-center gap-2 bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">
+      <button 
+        type="submit"
+        disabled={loading}
+        className="flex-center gap-2 bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold">
         {loading
         ?<ThreeDots
         visible={true}

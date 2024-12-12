@@ -12,11 +12,11 @@ interface FormElementProps{
 const FormElementWrapper = ({label, error, children}:FormElementProps) => {
 
   return (
-    <div className='flex flex-1 flex-col-reverse transition-colors duration-500 my-2'>
+    <div className='flex flex-col-reverse transition-colors duration-500 my-2'>
       {error && (<span className="text-red-500 text-xs">*{error.message}</span>)}
       { children }
       <label 
-        className='peer-focus:text-sky-400 peer-disabled:text-gray-500 text-sm'>
+        className='peer-focus:text-sky-400 peer-disabled:text-gray-500 text-md'>
           {`${label}:`}
       </label>
     </div>

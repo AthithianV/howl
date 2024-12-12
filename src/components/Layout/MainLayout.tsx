@@ -25,7 +25,7 @@ function MainLayout() {
   }, [])
 
   return (
-    <div className="h-screen w-screen flex-center overflow-auto">
+    <div className="w-screen flex-center overflow-auto">
       <Sidebar />
       <div className="flex-1 bg-slate-50">
         <Outlet />

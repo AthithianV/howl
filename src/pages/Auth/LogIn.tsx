@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 
 import FormElementWrapper from "../../components/ui/FormElementWrapper";
 import Brand from "../../components/Brand";
-import googleIcon from "../assets/icons/google.svg";
+// import googleIcon from "../assets/icons/google.svg";
 import { LogInSchema } from "../../validation/login";
 import { loginWithEmailPassword } from "../../database/users/auth";
 import SuccessMessage from "../../components/ui/SuccessMessage";
@@ -63,7 +63,7 @@ const LogIn = () => {
   } 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-lg flex-center flex-col p-12 shadow-lg rounded-lg bg-white">
+    <form onSubmit={()=>handleSubmit(onSubmit)} className="text-lg flex-center flex-col p-12 shadow-lg rounded-lg bg-white">
       <Brand/>
 
       {!errors.root?.message && success && <SuccessMessage message={success}/>}
