@@ -5,5 +5,5 @@ export type InterestType = {
     animes: string[],
     movies: string[],
     foods: string[],
-    uid: DocumentReference<DocumentData, DocumentData>,
+    id: string,
 }

@@ -5,12 +5,13 @@ import { useState } from "react";
 
 import useUser from "../../store/userStore";
 import FormElementWrapper from "../ui/FormElementWrapper";
-import ProfileName from "../ui/ProfileName";
 import SuccessMessage from "../ui/SuccessMessage";
 import ErrorMessage from "../ui/ErrorMessage";
 import { ProfileFormSchema } from "../../validation/ProfileForm";
 import { ThreeDots } from "react-loader-spinner";
 import ProfilePicturePicker from "./ProfilePicturePicker";
+import { createProfile } from "../../database/profile/CreateProfile";
+import { useNavigate } from "react-router-dom";
 
 const InterestInfo = ({interest}:{interest:string})=>{
   return <span className="hidden peer-focus:block text-xs text-gray-400 font-semibold">
@@ -22,6 +23,7 @@ const InterestInfo = ({interest}:{interest:string})=>{
 const ProfileForm = () => {
 
   const {user} = useUser();
+  const navigate = useNavigate();
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setError, setValue, formState: {errors} } = useForm({
@@ -44,7 +46,10 @@ const ProfileForm = () => {
   const onSubmit = async (data:z.infer<typeof ProfileFormSchema>)=>{
     setLoading(true);
     try {
-      
+      if(user){
+        await createProfile(data, user.uid);
+        navigate("/");
+      }
     } catch (error) {
         setError("root", {message: "Something Went Wrong"})
     }finally{
@@ -54,7 +59,7 @@ const ProfileForm = () => {
 
 
   return (
-    <form onSubmit={()=>handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* {user && <ProfileName name={user.username} email={user.email}>
         {<></>}
       </ProfileName>} */}
@@ -62,9 +67,10 @@ const ProfileForm = () => {
       <h1 className="text-center my-4 text-2xl font-bold">Create Your Profile</h1>
 
       
-
-      {!errors.root?.message && success && <SuccessMessage message={success}/>}
-      {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
+      <div className="flex-center">
+        {!errors.root?.message && success && <SuccessMessage message={success}/>}
+        {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
+      </div>
 
       <div>
         <FormElementWrapper label="Full Name" error={errors.fullName}>
@@ -78,7 +84,7 @@ const ProfileForm = () => {
           <input
             type="number"
             className={`input border border-black py-3 px-3 my-1 peer ${errors.age?'border-red-500':""}`}
-            {...register("age")}/>
+            {...register("age", {valueAsNumber: true})}/>
         </FormElementWrapper>
 
         <FormElementWrapper label="Occupation" error={errors.occupation}>
@@ -88,10 +94,10 @@ const ProfileForm = () => {
             {...register("occupation")}/>
         </FormElementWrapper>
 
-        <FormElementWrapper label="Gender" error={errors.fullName}>
+        <FormElementWrapper label="Gender" error={errors.gender}>
           <select
-            className={`input border border-black py-3 px-3 my-1 peer ${errors.fullName?'border-red-500':""}`}
-            {...register("fullName")}>
+            className={`input border border-black py-3 px-3 my-1 peer ${errors.gender?'border-red-500':""}`}
+            {...register("gender")}>
               <option>MALE</option>
               <option>FEMALE</option>
               <option>OTHERS</option>

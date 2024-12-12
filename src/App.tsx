@@ -6,6 +6,7 @@ import MainLayout from './components/Layout/MainLayout';
 import AuthLayout from './components/Layout/AuthLayout';
 import CreateProfile from './pages/Profile/CreateProfile';
 import ProfileLayout from './components/Layout/ProfileLayout';
+import Howl from './pages/Home/Howl';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
               </Route>
               <Route path="/" element={<MainLayout />}>
                 <Route index element={<Home />} />
+                <Route path="howl" element={<Howl />} />
                 <Route path="chat" element={<Chat />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="/profile" element={<ProfileLayout/>}>

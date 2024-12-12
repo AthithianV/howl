@@ -30,4 +30,19 @@
   .btn {
     @apply flex-center gap-2 bg-sky-400 my-5 shadow rounded py-1 px-4 text-white active:bg-sky-500 font-semibold;
   }
+
+  .howl-btn{
+    @apply flex-center bg-black rounded-full p-5 h-[125px] w-[125px] cursor-pointer
+  }
+
 }
+
+.howling {
+  background-image: url("/howling_poster.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+

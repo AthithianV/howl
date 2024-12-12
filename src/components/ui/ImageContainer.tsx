@@ -6,7 +6,7 @@ type PropType = {
     width: number,
 }
 
-const ProfilePicture = (prop:PropType) => {
+const ImageContainer = (prop:PropType) => {
   return (
     <div className="p-2 rounded-full border-2 border-black bg-white hover:border-sky-400 shadow w-fit">
         <img 
@@ -18,4 +18,4 @@ const ProfilePicture = (prop:PropType) => {
   )
 }
 
-export default ProfilePicture
+export default ImageContainer

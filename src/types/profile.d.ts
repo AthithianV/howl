@@ -5,5 +5,5 @@ export type ProfileType = {
     gender: "MALE" | "FEMALE" | "OTHERS" | null,
     occupation: string | null,
     pictureUrl: string | null,
-    uid: DocumentReference<DocumentData, DocumentData>,
+    id:string
 }

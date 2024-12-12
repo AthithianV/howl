@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { profile_picture_map } from "../../util/profile_picture_map"
-import ProfilePicture from "../ui/ProfilePicture"
+import ImageContainer from "../ui/ImageContainer"
 import { UseFormSetValue } from "react-hook-form";
 
 type SetValueType = UseFormSetValue<{
@@ -32,7 +32,7 @@ const ProfilePicturePicker = (prop:{setValue: SetValueType}) => {
                 className={`cursor-pointer ${selectedPicture===url?"bg-sky-400":""} p-1 rounded`} key={index}
                 onClick={()=>{setSelectedPicture(url); prop.setValue("pictureUrl", url)}}
                 >
-                    <ProfilePicture name={url} url={url} height={10} width={10}/>
+                    <ImageContainer name={url} url={url} height={10} width={10}/>
                 </div>
             ))
             }

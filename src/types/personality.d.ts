@@ -4,5 +4,5 @@ export type PersonalityType = {
     extraversion: number,
     neuroticism: number,
     openness: number,
-    uid: DocumentReference<DocumentData, DocumentData>,
+    id: string
 }
