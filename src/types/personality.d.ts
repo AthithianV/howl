@@ -5,4 +5,5 @@ export type PersonalityType = {
     neuroticism: number,
     openness: number,
     id: string
+    uid: RefType,
 }

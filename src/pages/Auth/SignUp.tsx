@@ -36,7 +36,7 @@ const SignUp = () => {
       setLoading(true);
       await signupWithEmailPassword(data.username, data.email, data.password);
       setSuccess("Sign Up Successfully!!!");
-      navigate("/auth/signup");
+      navigate("/auth/login");
     } catch (error) {
       if(error instanceof FirebaseError){
         if(error.code==="auth/email-already-in-use"){

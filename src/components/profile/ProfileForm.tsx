@@ -2,16 +2,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 import useUser from "../../store/userStore";
 import FormElementWrapper from "../ui/FormElementWrapper";
 import SuccessMessage from "../ui/SuccessMessage";
 import ErrorMessage from "../ui/ErrorMessage";
-import { ProfileFormSchema } from "../../validation/ProfileForm";
-import { ThreeDots } from "react-loader-spinner";
 import ProfilePicturePicker from "./ProfilePicturePicker";
-import { createProfile } from "../../database/profile/CreateProfile";
-import { useNavigate } from "react-router-dom";
+import { createProfile } from "../../database/profile/createProfile";
+import { ProfileFormSchema } from "../../validation/ProfileForm";
 
 const InterestInfo = ({interest}:{interest:string})=>{
   return <span className="hidden peer-focus:block text-xs text-gray-400 font-semibold">
@@ -47,7 +48,10 @@ const ProfileForm = () => {
     setLoading(true);
     try {
       if(user){
-        await createProfile(data, user.uid);
+        const userData = await createProfile(data, user.uid);
+        if(userData){
+          Cookies.set("user", JSON.stringify(userData));
+        }
         navigate("/");
       }
     } catch (error) {

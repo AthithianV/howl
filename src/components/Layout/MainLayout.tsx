@@ -12,7 +12,7 @@ function MainLayout() {
 
   const user = cookies.get("user");
 
-  useEffect(()=>{
+  useEffect(()=>{    
     if(user){
       const userInfo = JSON.parse(user);
       setUser(userInfo);
@@ -27,7 +27,7 @@ function MainLayout() {
   return (
     <div className="w-screen flex-center overflow-auto">
       <Sidebar />
-      <div className="flex-1 bg-slate-50 h-screen flex-center">
+      <div className="flex-1 bg-slate-50 h-screen overflow-auto">
         <Outlet />
       </div>
     </div>

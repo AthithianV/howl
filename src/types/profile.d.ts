@@ -1,3 +1,4 @@
+export type RefType = DocumentReference<DocumentData, DocumentData>;
 
 export type ProfileType = {
     age: number | null,
@@ -5,5 +6,6 @@ export type ProfileType = {
     gender: "MALE" | "FEMALE" | "OTHERS" | null,
     occupation: string | null,
     pictureUrl: string | null,
-    id:string
+    id:string,
+    uid: RefType,
 }

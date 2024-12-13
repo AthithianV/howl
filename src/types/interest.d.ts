@@ -6,4 +6,5 @@ export type InterestType = {
     movies: string[],
     foods: string[],
     id: string,
+    uid: RefType,
 }

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { profile_picture_map } from "../../util/profile_picture_map"
+import { profile_picture_map } from "../../util/profiles/profile_picture_map"
 import ImageContainer from "../ui/ImageContainer"
 import { UseFormSetValue } from "react-hook-form";
 
