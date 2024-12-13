@@ -7,6 +7,8 @@ import AuthLayout from './components/Layout/AuthLayout';
 import CreateProfile from './pages/Profile/CreateProfile';
 import ProfileLayout from './components/Layout/ProfileLayout';
 import Howl from './pages/Home/Howl';
+import ChatBox from './pages/Chat/ChatBox';
+import { ThreeDots } from 'react-loader-spinner';
 
 function App() {
 
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <div className='h-screen w-screen flex'>
-      <Suspense fallback={<div className="container">Loading...</div>}>
+      <Suspense fallback={<div className="container h-screen w-screen flex-center"><ThreeDots color='#38bdf8'/></div>}>
           <Routes>
               <Route path="/auth" element={<AuthLayout/>}>
                   <Route path={"signup"} element={<SignUp />} />
@@ -29,7 +31,9 @@ function App() {
               <Route path="/" element={<MainLayout />}>
                 <Route index element={<Home />} />
                 <Route path="howl" element={<Howl />} />
-                <Route path="chat" element={<Chat />} />
+                <Route path="chat" element={<Chat />}>
+                  <Route path=":chatId" element={<ChatBox/>}/>
+                </Route>
                 <Route path="groups" element={<Groups />} />
                 <Route path="/profile" element={<ProfileLayout/>}>
                   <Route index element={<Profile/>}/>

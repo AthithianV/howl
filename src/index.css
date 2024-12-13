@@ -16,7 +16,7 @@
   }
 
   .sidebar-item {
-    @apply flex gap-2 py-3 px-16 text-xl font-semibold items-center hover:bg-slate-300 hover:text-sky-300 rounded;
+    @apply max-md:px-1  flex gap-2 max-md:gap-0 max-md:justify-center py-3 px-16 text-xl font-semibold items-center hover:bg-slate-300 hover:text-sky-300 rounded;
   }
 
   .input {
@@ -33,6 +33,10 @@
 
   .howl-btn{
     @apply flex-center bg-black rounded-full p-5 h-[125px] w-[125px] cursor-pointer
+  }
+
+  .pack-item{
+    @apply py-2 px-5 flex-center gap-2 rounded cursor-pointer
   }
 
 }

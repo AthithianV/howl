@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPaperPlane, faPowerOff, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
-import Brand from "./Brand";
+import Brand, { BrandImg } from "./Brand";
 import { useEffect, useState } from "react";
 
 const topLinks = [
@@ -58,14 +58,19 @@ const Sidebar = () => {
   return (
     <nav className='h-full bg-slate-200 flex flex-col justify-between p-2'>
         <div>
-            <Brand/>
+            <div className="hidden max-md:block py-2 border-b-2 border-white mb-2">
+                <BrandImg/>
+            </div>
+            <div className="blcok max-md:hidden">
+                <Brand/>
+            </div>
             <ul>
                 {
                     topLinks.map((link, index)=>(
                         <li key={index}>
                             <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
-                                {link.name}
+                                <span className="max-md:hidden block">{link.name}</span>
                             </Link>
                         </li>)
                     )
@@ -79,7 +84,7 @@ const Sidebar = () => {
                         <li key={index} onClick={()=>{if(link.name==="Sign Out") signout()}}>
                             <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
-                                {link.name}
+                                <span className="max-md:hidden block">{link.name}</span>
                             </Link>
                         </li>)
                     )
