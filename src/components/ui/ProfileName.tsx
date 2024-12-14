@@ -8,7 +8,7 @@ type PropType = {
 
 const ProfileName = ({name, email, children}:PropType) => {
   return (
-    <div className="border-b-2 gap-2 py-2 flex justify-start">
+    <div className="border-b-2 gap-2 py-2 flex justify-start items-center">
         {children}
         <div>
             <h1 className="text-4xl font-bold">{name}</h1>

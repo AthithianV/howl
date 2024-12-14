@@ -45,6 +45,16 @@ const Sidebar = () => {
     const [completeSignOut, setCompleteSignOut] = useState(false);
     const {setChat} = useChat();
 
+    function activeLink(path:string){
+        if(
+            (location.pathname.startsWith("/chat") && path === "/chat") ||
+            (location.pathname.startsWith("/profile") && path === "/profile")
+        ){
+            return "text-sky-400";
+        }
+        return location.pathname === path?"text-sky-400":""
+    }
+
 
     useEffect(()=>{
         if(completeSignOut){
@@ -71,7 +81,9 @@ const Sidebar = () => {
                 {
                     topLinks.map((link, index)=>(
                         <li key={index} onClick={()=>{if(link.name==="Chat")setChat(null)}}>
-                            <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
+                            <Link 
+                            to={link.to} 
+                            className={`sidebar-item ${activeLink(link.to)}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
                                 <span className="max-md:hidden block">{link.name}</span>
                             </Link>
@@ -85,7 +97,7 @@ const Sidebar = () => {
                 {
                     bottomLinks.map((link, index)=>(
                         <li key={index} onClick={()=>{if(link.name==="Sign Out") signout()}}>
-                            <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
+                            <Link to={link.to} className={`sidebar-item ${activeLink(link.to)}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
                                 <span className="max-md:hidden block">{link.name}</span>
                             </Link>

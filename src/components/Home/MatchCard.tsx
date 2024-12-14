@@ -1,4 +1,4 @@
-import { faCheck, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { ThreeDots } from "react-loader-spinner"
@@ -10,6 +10,7 @@ import { addToChatList } from "../../database/chatList/addToChatList"
 import useUser from "../../store/userStore"
 import useChat from "../../store/chatStore"
 import { toast } from "react-toastify"
+import { Link } from "react-router-dom"
 
 const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
 
@@ -47,6 +48,7 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
         {
             (match.matches.ageMatch || match.matches.occupationMatch || match.matches.genderMatch) &&
             <div className="flex flex-col border-b-2  gap-2 py-2 my-2">
+                <h1 className="font-semibold underline">Profile Matches: </h1>
                 {match.matches.ageMatch && <div><span className="font-semibold">Age:</span> {match.profile.age}</div>}
                 {match.matches.occupationMatch && <div><span className="font-semibold">Occupation:</span> {match.profile.occupation}</div>}
                 {match.matches.genderMatch && <div><span className="font-semibold">Gender:</span> {match.profile.gender}</div>}
@@ -57,9 +59,9 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
         
         <div className="flex-center py-5 border-t-2">
             {added
-            ?<button className="bg-zinc-400 py-1 px-4 rounded-md text-white font-semibold flex-center gap-1" disabled>
-                <FontAwesomeIcon icon={faCheck}/>Started Chat
-            </button>
+            ?<Link to={`/chat/${match.user.uid}`} className="bg-sky-400 py-1 px-4 rounded-md text-white font-semibold flex-center gap-1">
+                Open Chat
+            </Link>
             :<button onClick={addUser} className="bg-black py-1 px-4 rounded-md text-white font-semibold">
                 {loading
                     ?<ThreeDots

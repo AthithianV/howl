@@ -9,9 +9,9 @@ import LogIn from './pages/Auth/LogIn';
 import MainLayout from './components/Layout/MainLayout';
 import AuthLayout from './components/Layout/AuthLayout';
 import CreateProfile from './pages/Profile/CreateProfile';
-import ProfileLayout from './components/Layout/ProfileLayout';
 import Howl from './pages/Home/Howl';
 import ChatBox from './pages/Chat/ChatBox';
+import UserProfile from './pages/Profile/UserProfile';
 
 
 function App() {
@@ -21,9 +21,6 @@ function App() {
   const Groups = lazy(() => import('./pages/Group/Groups'));
   const Profile = lazy(() => import('./pages/Profile/Profile'));
   const NoMatch = lazy(() => import('./components/NoMatch'));
-
-  const notify = () => toast("");
-
 
   return (
     <div className='h-screen w-screen flex'>
@@ -52,9 +49,9 @@ function App() {
                   <Route path=":userId" element={<ChatBox/>}/>
                 </Route>
                 <Route path="groups" element={<Groups />} />
-                <Route path="/profile" element={<ProfileLayout/>}>
-                  <Route index element={<Profile/>}/>
+                <Route path="/profile" element={<Profile/>}>
                   <Route path="create-profile" element={<CreateProfile />} />
+                  <Route path=":uid" element={<UserProfile />} />
                 </Route>
               </Route>
               <Route path="*" element={<NoMatch />} />

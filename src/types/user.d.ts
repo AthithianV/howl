@@ -11,3 +11,10 @@ export type UserType = {
     personalityId: RefType | null,
     uid: string
 }
+
+export type UserDataType = {
+    user: UserType;
+    personality: PersonalityType;
+    interest: InterestType;
+    profile: ProfileType;
+}

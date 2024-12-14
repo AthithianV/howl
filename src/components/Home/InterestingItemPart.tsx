@@ -13,7 +13,7 @@ const InterestingItemPart = ({interests, title, icon}:PropType) => {
         <span className="font-semibold"><FontAwesomeIcon icon={icon}/> {title}: </span>
         {
             interests.map((interest, index)=>(
-                <span key={index} className="text-sm bg-sky-400 font-semibold text-white px-2 py-[0.4px] rounded">{interest}</span>
+                <span key={index} className="text-sm bg-violet-400 font-semibold text-white px-2 py-[0.4px] rounded">{interest}</span>
             ))
         }
     </div>

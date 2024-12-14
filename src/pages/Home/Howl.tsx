@@ -20,13 +20,7 @@ const Howl = () => {
             navigate("/");
             setFinishedMatching(false);
         }
-    }, [finishedMatching])
-
-    useEffect(()=>{
-        if(user && user.matchedProfileCount>0){
-            navigate("/");
-        }
-    }, [user]);
+    }, [finishedMatching]);
 
     async function howl(){
         setLoading(true);
