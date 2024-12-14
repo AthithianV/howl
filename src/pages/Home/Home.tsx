@@ -19,6 +19,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    if(user && !user.hasProfile){
+      navigate("/profile/create-profile");
+    }
+  }, [user])
+
+  useEffect(()=>{
     if(user && !user.matchedProfileCount){
       navigate("/howl");
       return;

@@ -2,7 +2,7 @@ import { InterestType } from '../../types/interest'
 import InterestSectionWrapper from './InterestSectionWrapper'
 
 const UnWrapInterests = ({interests, color}:{interests:string[], color:string})=>{
-    return <div>
+    return <div className='flex flex-wrap gap-2'>
         {
             interests.map(interest=>(<span className={`py-[0.2px] px-1 rounded text-white font-semibold ${color}`}>
                 {interest}

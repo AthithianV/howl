@@ -8,7 +8,8 @@ type State = {
     chatList: {user:UserType, profile:ProfileType}[],
     selectedChat: string | null,
     messages: MessageType[],
-    message: MessageType | null
+    message: MessageType | null,
+    displayPrompt: boolean
 }
 
 type Action = {
@@ -16,6 +17,7 @@ type Action = {
     setChat: (chat:State["selectedChat"])=> void,
     setMessages: (messages:State["messages"])=> void,
     addMessage: (message: State["message"])=>void
+    togglePrompt: (message: State["displayPrompt"])=>void
 }
 
 const useChat  = create<State & Action>((set)=>({
@@ -32,7 +34,9 @@ const useChat  = create<State & Action>((set)=>({
         else{
             return {messages: state.messages};
         }
-    })
+    }),
+    displayPrompt: false,
+    togglePrompt: (view)=>set(()=>({displayPrompt: view}))
 }))
 
 export default useChat;

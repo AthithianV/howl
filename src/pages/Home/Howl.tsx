@@ -22,6 +22,13 @@ const Howl = () => {
         }
     }, [finishedMatching]);
 
+    
+  useEffect(()=>{
+    if(user && !user.hasProfile){
+      navigate("/profile/create-profile");
+    }
+  }, [user])
+
     async function howl(){
         setLoading(true);
         try {

@@ -22,7 +22,7 @@ const InterestInfo = ({interest}:{interest:string})=>{
 
 const ProfileForm = () => {
 
-  const {user} = useUser();
+  const {user, setUser} = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setValue, formState: {errors} } = useForm({
@@ -48,7 +48,7 @@ const ProfileForm = () => {
       if(user){
         const userData = await createProfile(data, user.uid);
         if(userData){
-          Cookies.set("user", JSON.stringify(userData));
+          setUser(userData);
         }
         toast.success("Profile Created Successfully!")
         navigate("/");
