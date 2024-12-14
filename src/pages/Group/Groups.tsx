@@ -1,7 +1,12 @@
+import { Outlet } from "react-router-dom"
+import GroupList from "../../components/Group/GroupList"
 
 const Groups = () => {
   return (
-    <div>Groups</div>
+    <div>
+      <GroupList />
+      <Outlet/>
+    </div>
   )
 }
 

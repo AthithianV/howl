@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const InputBox = () => {
 
     const {user} = useUser();
-    const {selectedChat, setChat, addMessage} = useChat();
+    const {selectedChat, setChat, addMessage, promptText, messages:list} = useChat();
     const [message, setMessage] = useState("");
     const [loader, setLoader] = useState(false);
 
@@ -21,6 +21,12 @@ const InputBox = () => {
         if(userId)  
             setChat(userId);
     }, [])
+
+    useEffect(()=>{
+        if(promptText){
+            setMessage(promptText);
+        }
+    }, [promptText])
 
     const handleSubmission = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();

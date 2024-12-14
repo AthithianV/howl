@@ -8,34 +8,14 @@ import { useEffect, useState } from "react";
 import useChat from "../store/chatStore";
 
 const topLinks = [
-    {
-        name: "Home",
-        to: "/",
-        icon: faHome
-    },
-    {
-        name: "Chat",
-        to: "/chat",
-        icon: faPaperPlane
-    },
-    {
-        name: "Groups",
-        to: "/groups",
-        icon: faUserGroup
-    }
+    { name: "Home", to: "/", icon: faHome },
+    { name: "Chat", to: "/chat", icon: faPaperPlane},
+    { name: "Groups", to: "/group", icon: faUserGroup }
 ];
 
 const bottomLinks = [
-    {
-        name: "Profile",
-        to: "/profile",
-        icon: faUser
-    },
-    {
-        name: "Sign Out",
-        to: "/signout",
-        icon: faPowerOff
-    }
+    { name: "Profile", to: "/profile", icon: faUser },
+    { name: "Sign Out", to: "/signout", icon: faPowerOff }
 ]
 
 const Sidebar = () => {
@@ -48,7 +28,8 @@ const Sidebar = () => {
     function activeLink(path:string){
         if(
             (location.pathname.startsWith("/chat") && path === "/chat") ||
-            (location.pathname.startsWith("/profile") && path === "/profile")
+            (location.pathname.startsWith("/profile") && path === "/profile") ||
+            (location.pathname.startsWith("/group") && path === "/group")
         ){
             return "text-sky-400";
         }

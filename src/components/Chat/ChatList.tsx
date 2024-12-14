@@ -38,11 +38,6 @@ const ChatListBox = () => {
                 className={`chatlist-item ${selectedChat === p.user.uid?"bg-sky-400":"hover:bg-slate-300"}`}
                 onClick={()=>setChat(p.user.uid)}
                 >
-                    {/* <ImageContainer 
-                        url={p.profile.pictureUrl as string}
-                        name={p.profile.fullName} 
-                        height={10}
-                        width={10}/> */}
                     <div className="p-2 rounded-full bg-white">
                         {p.profile.pictureUrl && <img src={p.profile.pictureUrl} alt={p.profile.fullName} className="h-8 w-8 overflow-hidden"/>}
                     </div>

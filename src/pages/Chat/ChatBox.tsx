@@ -17,7 +17,7 @@ const ChatBox = () => {
 
   const { userId } = useParams();
   const {user} = useUser();
-  const { setChat, displayPrompt, togglePrompt } = useChat();
+  const { setChat, displayPrompt, setPromptDisplay } = useChat();
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [loader, setLoader] = useState(false);
 
@@ -32,9 +32,19 @@ const ChatBox = () => {
         }
     }, [userId]);
 
+    useEffect(()=>{
+      if(messages.length===0){
+        setPromptDisplay(true);
+      }else{
+        setPromptDisplay(false);
+      }
+    }, [messages]);
+
   return (
-    <div className='py-5 px-10 flex flex-col gap-1 h-screen min-w-[400px]'>
-      {displayPrompt && <PromptBox/>}
+    <div className='py-5 px-10 flex flex-col gap-1 h-screen min-w-[400px] relative box-border overflow-hidden'>
+      <div className='relative'>
+        {displayPrompt && messages && messages.length===0 && <PromptBox />}
+      </div>
       {
         loader
         ?<LoaderWrapper><ThreeDots color='#38bdf8'/></LoaderWrapper>

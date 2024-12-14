@@ -20,6 +20,10 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
     const {chatList} = useChat();
 
     useEffect(()=>{
+        console.log(chatList);
+        console.log(match.user.uid);
+        
+        
         if(chatList.some(chat=>chat.user.uid === match.user.uid))
             setAdded(true);
     }, [chatList])
@@ -54,9 +58,26 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
             (match.matches.ageMatch || match.matches.occupationMatch || match.matches.genderMatch) &&
             <div className="flex flex-col border-b-2  gap-2 py-2 my-2">
                 <h1 className="font-semibold underline">Profile Matches: </h1>
-                {match.matches.ageMatch && <div><span className="font-semibold">Age:</span> {match.profile.age}</div>}
-                {match.matches.occupationMatch && <div><span className="font-semibold">Occupation:</span> {match.profile.occupation}</div>}
-                {match.matches.genderMatch && <div><span className="font-semibold">Gender:</span> {match.profile.gender}</div>}
+                    <div>
+                        <span className="font-semibold">Age:</span> 
+                        {
+                            match.matches.ageMatch
+                            ?<span>{match.profile.age}</span>
+                            :<span>N/A</span>
+                        }
+                    </div>
+                    <div>
+                        <span className="font-semibold">Occupation:</span> 
+                        {match.matches.occupationMatch
+                        ?<span>{match.profile.occupation}</span>
+                        :<span>N/A</span>}
+                    </div>
+                    <div>
+                        <span className="font-semibold">Gender:</span> 
+                        {match.matches.genderMatch
+                        ?<span>{match.profile.occupation}</span>
+                        :<span>N/A</span>}
+                    </div>
             </div>
         }
 

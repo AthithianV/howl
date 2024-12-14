@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, or, query, where } from "firebase/firestore";
+import { and, collection, doc, getDocs, or, query, where } from "firebase/firestore";
 import db from "../firebase";
 import { MessageType } from "../../types/message";
 
@@ -9,10 +9,14 @@ export async function getMessages(uid1:string, uid2:string):Promise<MessageType[
             query(
                 collection(db, "messages"),
                 or(
-                    where("sender", "==", doc(db, "users", uid1)),
-                    where("recieve", "==", doc(db, "users", uid2)),
-                    where("sender", "==", doc(db, "users", uid2)),
-                    where("recieve", "==", doc(db, "users", uid1)),
+                    and(
+                        where("sender", "==", doc(db, "users", uid1)),
+                        where("receiver", "==", doc(db, "users", uid2)),
+                    ),
+                    and(
+                        where("sender", "==", doc(db, "users", uid2)),
+                        where("receiver", "==", doc(db, "users", uid1)),
+                    )
                 )
             )
         )

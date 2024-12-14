@@ -12,6 +12,8 @@ import CreateProfile from './pages/Profile/CreateProfile';
 import Howl from './pages/Home/Howl';
 import ChatBox from './pages/Chat/ChatBox';
 import UserProfile from './pages/Profile/UserProfile';
+import CreateGroup from './pages/Group/CreateGroup';
+import GroupBox from './pages/Group/GroupBox';
 
 
 function App() {
@@ -48,7 +50,10 @@ function App() {
                 <Route path="chat" element={<Chat />}>
                   <Route path=":userId" element={<ChatBox/>}/>
                 </Route>
-                <Route path="groups" element={<Groups />} />
+                <Route path="group" element={<Groups />}>
+                  <Route path="create-group" element={<CreateGroup/>}/>
+                  <Route path=":groupId" element={<GroupBox/>}/>
+                </Route>
                 <Route path="/profile" element={<Profile/>}>
                   <Route path="create-profile" element={<CreateProfile />} />
                   <Route path=":uid" element={<UserProfile />} />

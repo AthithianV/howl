@@ -9,15 +9,18 @@ type State = {
     selectedChat: string | null,
     messages: MessageType[],
     message: MessageType | null,
-    displayPrompt: boolean
+    displayPrompt: boolean,
+    promptText: string,
 }
 
 type Action = {
     setChatList: (chatList:State["chatList"])=> void,
     setChat: (chat:State["selectedChat"])=> void,
     setMessages: (messages:State["messages"])=> void,
-    addMessage: (message: State["message"])=>void
-    togglePrompt: (message: State["displayPrompt"])=>void
+    addMessage: (message: State["message"])=>void,
+    setPromptDisplay: (message: State["displayPrompt"])=>void,
+    setPromptText: (prompt:State["promptText"])=> void,
+
 }
 
 const useChat  = create<State & Action>((set)=>({
@@ -30,13 +33,15 @@ const useChat  = create<State & Action>((set)=>({
     setMessages: (messages)=>set(()=>({messages})),
     addMessage: (message) => set((state)=>{
         if(message)
-            return {messages: [message, ...state.messages]};
+            return {messages: [...state.messages, message]};
         else{
             return {messages: state.messages};
         }
     }),
-    displayPrompt: false,
-    togglePrompt: (view)=>set(()=>({displayPrompt: view}))
+    displayPrompt: true,
+    setPromptDisplay: (view)=>set(()=>({displayPrompt: view})),
+    promptText: "",
+    setPromptText: (promptText) => set(()=>({promptText})),
 }))
 
 export default useChat;
