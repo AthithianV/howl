@@ -6,27 +6,29 @@ import { ThreeDots } from "react-loader-spinner"
 import { MatchedUser } from "../../types/match"
 import ImageContainer from "../ui/ImageContainer"
 import InterestPart from "./InterestPart"
-import { addToPack } from "../../database/pack/addToPack"
+import { addToChatList } from "../../database/chatList/addToChatList"
 import useUser from "../../store/userStore"
-import usepack from "../../store/packStore"
+import useChat from "../../store/chatStore"
+import { toast } from "react-toastify"
 
-const MatchCard = ({match, index}:{index:number, match:MatchedUser}) => {
+const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
 
     const [loading, setLoading] = useState(false);
     const [added, setAdded] = useState(false);
     const {user} = useUser();
-    const {pack} = usepack();
+    const {chatList} = useChat();
 
     useEffect(()=>{
-        setAdded(true);
-    }, [pack])
+        if(chatList.some(chat=>chat.user.uid === match.user.uid))
+            setAdded(true);
+    }, [chatList])
 
     const addUser = ()=>{
         setLoading(true);
         if(user){
-            Promise.resolve(addToPack(user.uid, match.user.uid))
+            Promise.resolve(addToChatList(user.uid, match.user.uid))
             .then(()=>setAdded(true))
-            .catch((err)=>console.log(err))
+            .catch((err)=>toast.error("Somthing Went Wrong!"))
             .finally(()=>setLoading(false));
         }
     }
@@ -56,7 +58,7 @@ const MatchCard = ({match, index}:{index:number, match:MatchedUser}) => {
         <div className="flex-center py-5 border-t-2">
             {added
             ?<button className="bg-zinc-400 py-1 px-4 rounded-md text-white font-semibold flex-center gap-1" disabled>
-                <FontAwesomeIcon icon={faCheck}/>Added
+                <FontAwesomeIcon icon={faCheck}/>Started Chat
             </button>
             :<button onClick={addUser} className="bg-black py-1 px-4 rounded-md text-white font-semibold">
                 {loading
@@ -65,7 +67,7 @@ const MatchCard = ({match, index}:{index:number, match:MatchedUser}) => {
                         height={25}
                         width={25} 
                     />
-                    :<span className="flex-center gap-1"><FontAwesomeIcon icon={faPlus}/>ADD</span>}
+                    :<span className="flex-center gap-1"><FontAwesomeIcon icon={faPlus}/>Start Chat</span>}
             </button>
             }
         </div>

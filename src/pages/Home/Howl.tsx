@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useUser from "../../store/userStore";
 import { matchProfile } from "../../database/profile/profileMatching";
 import HowlButton from "../../components/Home/HowlButton";
+import { toast } from "react-toastify";
 
 const Howl = () => {
 
@@ -41,8 +42,7 @@ const Howl = () => {
                 }
             }
         }catch (error) {
-            console.log(error);
-            setError("Something Went Wrong")
+            toast.error("Somthing Went Wrong!")
         }finally{
             setLoading(false);
         }

@@ -13,6 +13,7 @@ import googleIcon from "../assets/icons/google.svg";
 import SuccessMessage from "../../components/ui/SuccessMessage";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import { signupWithEmailPassword } from "../../database/users/auth";
+import { toast } from "react-toastify";
 
 
 const SignUp = () => {
@@ -40,11 +41,11 @@ const SignUp = () => {
     } catch (error) {
       if(error instanceof FirebaseError){
         if(error.code==="auth/email-already-in-use"){
-          setError("root", {message: "EmailID is already in use. Try Different EmailID"})
+          toast.error("EmailID is already in use. Try Different EmailID")
         }
         
       }else{
-        setError("root", {message: "Something Went Wrong!"});
+        toast.error("Somthing Went Wrong!")
       }
     }finally{
       setLoading(false);

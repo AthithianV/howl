@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useUser from "../../store/userStore"
 import { useEffect, useState } from "react";
 import getMatchingProfile from "../../database/profile/getMatchingProfile";
@@ -6,13 +6,14 @@ import LoaderWrapper from "../../components/ui/LoaderWrapper";
 import { ThreeDots } from "react-loader-spinner";
 import { MatchedUser } from "../../types/match";
 import MatchCard from "../../components/Home/MatchCard";
-import { getPack } from "../../database/pack/getPack";
-import usepack from "../../store/packStore";
+import { getChatList } from "../../database/chatList/getChatList";
+import useChat from "../../store/chatStore";
+import { toast } from "react-toastify";
 
 const Home = () => {
 
   const {user} = useUser();
-  const {pack, setPack} = usepack();
+  const {chatList, setChatList} = useChat();
   const [loader, setLoader] = useState(false);
   const [matches, setMatches] = useState<MatchedUser[]>([]);
   const navigate = useNavigate();
@@ -26,12 +27,12 @@ const Home = () => {
       setLoader(true);
       Promise.resolve(getMatchingProfile(user.uid))
       .then((result)=>setMatches(result))
-      .catch()
-      if(pack.length===0){
-        Promise.resolve(getPack(user.uid))
-        .then((result)=>setPack(result))
-        .catch()
-        .finally(()=>setLoader(false));
+      .catch(()=>toast.error("Somthing Went Wrong!"))
+      .finally(()=>setLoader(false));
+      if(chatList.length===0){
+        Promise.resolve(getChatList(user.uid))
+        .then((result)=>setChatList(result))
+        .catch(()=>toast.error("Somthing Went Wrong!"))
       }
     }
   },[user]);
@@ -45,6 +46,7 @@ const Home = () => {
     </LoaderWrapper>
     :<div className="p-5">
       <h1 className="text-center my-5 font-semibold text-4xl logo-font">Matched Users</h1>
+      <Link to="/howl">Find More Matches</Link>
       <div className="flex flex-wrap gap-2">
       {
         matches.map((match, index)=>(

@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react";
 
-import PackBox from "../../components/Chat/pack";
-import usepack from "../../store/packStore";
-import { getPack } from "../../database/pack/getPack";
+import ChatListBox from "../../components/Chat/ChatList";
+import useChat from "../../store/chatStore";
+import { getChatList } from "../../database/chatList/getChatList";
 import useUser from "../../store/userStore";
 import LoaderWrapper from "../../components/ui/LoaderWrapper";
 import { ThreeDots } from "react-loader-spinner";
 import { Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Chat = () => {
 
-  const {pack, setPack, selectedPack} = usepack();
+  const {chatList, setChatList, selectedChat, setChat} = useChat();
   const {user} = useUser();
   const [loader, setLoader] = useState(false);
     
   useEffect(()=>{
-      if(user && pack.length===0){
+      if(user && chatList.length===0){
           setLoader(true);
-          Promise.resolve(getPack(user.uid))
-          .then((result)=>setPack(result))
-          .catch()
+          Promise.resolve(getChatList(user.uid))
+          .then((result)=>setChatList(result))
+          .catch(()=>toast.error("Somthing Went Wrong!"))
           .finally(()=>setLoader(false));
       }
   }, [user])
+
+  useEffect(()=>{
+    setChat(null);
+  }, [])
 
   return (
     loader
       ?<LoaderWrapper><ThreeDots color="#38bdf8"/></LoaderWrapper>
       :<div className="flex">
-        <PackBox/>
+        <ChatListBox/>
         <div className="flex-1 overflow-auto h-screen">
           {
-            !selectedPack
+            !selectedChat
             ?<div className="flex-center">
               <img src="/chat-box-poster.svg" alt="Wolf Howling" className="h-[600px]"/>
             </div>

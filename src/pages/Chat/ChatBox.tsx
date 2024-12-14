@@ -1,9 +1,11 @@
-
-import React from 'react'
+import InputBox from '../../components/Chat/InputBox'
 
 const ChatBox = () => {
   return (
-    <div>ChatBox</div>
+    <div className='py-5 px-10 flex flex-col h-screen'>
+      <div className='flex-1 overflow-auto'></div>
+      <InputBox/>
+    </div>
   )
 }
 

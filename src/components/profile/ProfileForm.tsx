@@ -13,6 +13,7 @@ import ErrorMessage from "../ui/ErrorMessage";
 import ProfilePicturePicker from "./ProfilePicturePicker";
 import { createProfile } from "../../database/profile/createProfile";
 import { ProfileFormSchema } from "../../validation/ProfileForm";
+import { toast } from "react-toastify";
 
 const InterestInfo = ({interest}:{interest:string})=>{
   return <span className="hidden peer-focus:block text-xs text-gray-400 font-semibold">
@@ -55,7 +56,7 @@ const ProfileForm = () => {
         navigate("/");
       }
     } catch (error) {
-        setError("root", {message: "Something Went Wrong"})
+        toast.error("Somthing Went Wrong!")
     }finally{
       setLoading(false);
     }

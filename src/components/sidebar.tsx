@@ -5,6 +5,7 @@ import { faHome, faPaperPlane, faPowerOff, faUser, faUserGroup } from "@fortawes
 
 import Brand, { BrandImg } from "./Brand";
 import { useEffect, useState } from "react";
+import useChat from "../store/chatStore";
 
 const topLinks = [
     {
@@ -42,6 +43,8 @@ const Sidebar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [completeSignOut, setCompleteSignOut] = useState(false);
+    const {setChat} = useChat();
+
 
     useEffect(()=>{
         if(completeSignOut){
@@ -67,7 +70,7 @@ const Sidebar = () => {
             <ul>
                 {
                     topLinks.map((link, index)=>(
-                        <li key={index}>
+                        <li key={index} onClick={()=>{if(link.name==="Chat")setChat(null)}}>
                             <Link to={link.to} className={`sidebar-item ${location.pathname === link.to?"text-sky-400":""}`}>
                                 <FontAwesomeIcon icon={link.icon}/>
                                 <span className="max-md:hidden block">{link.name}</span>

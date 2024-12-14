@@ -1,5 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import SignUp from './pages/Auth/SignUp';
 import LogIn from './pages/Auth/LogIn';
 import MainLayout from './components/Layout/MainLayout';
@@ -8,7 +12,7 @@ import CreateProfile from './pages/Profile/CreateProfile';
 import ProfileLayout from './components/Layout/ProfileLayout';
 import Howl from './pages/Home/Howl';
 import ChatBox from './pages/Chat/ChatBox';
-import { ThreeDots } from 'react-loader-spinner';
+
 
 function App() {
 
@@ -18,10 +22,23 @@ function App() {
   const Profile = lazy(() => import('./pages/Profile/Profile'));
   const NoMatch = lazy(() => import('./components/NoMatch'));
 
+  const notify = () => toast("");
 
 
   return (
     <div className='h-screen w-screen flex'>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Suspense fallback={<div className="container h-screen w-screen flex-center"><ThreeDots color='#38bdf8'/></div>}>
           <Routes>
               <Route path="/auth" element={<AuthLayout/>}>
@@ -32,7 +49,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="howl" element={<Howl />} />
                 <Route path="chat" element={<Chat />}>
-                  <Route path=":chatId" element={<ChatBox/>}/>
+                  <Route path=":userId" element={<ChatBox/>}/>
                 </Route>
                 <Route path="groups" element={<Groups />} />
                 <Route path="/profile" element={<ProfileLayout/>}>

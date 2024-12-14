@@ -5,10 +5,13 @@ import { ProfileType, RefType } from "../../types/profile";
 import { UserType } from "../../types/user";
 
 
-export async function getPack(uid:string):Promise<{user: UserType, profile: ProfileType}[]>{
+export async function getChatList(uid:string):Promise<{user: UserType, profile: ProfileType}[]>{
     try{
-        const packSnap = await getDocs(query(collection(db, 'packs'), where('uid', '==', doc(db, 'users', uid))));
-        const result = await Promise.all(packSnap.docs[0].data().users.map(async (userRef:RefType)=>{
+        const chatListSnap = await getDocs(query(collection(db, 'chatlists'), where('uid', '==', doc(db, 'users', uid))));
+        if(chatListSnap.empty){
+            return [];
+        }
+        const result = await Promise.all(chatListSnap.docs[0].data().users.map(async (userRef:RefType)=>{
             const {user, profile} = await getUserData(userRef);
             return {
                 user, profile

@@ -1,6 +1,6 @@
 import { RefType } from "./profile"
 
-type PackType = {
+type ChatListType = {
     uid: RefType,
     users: RefType[],
     id: string

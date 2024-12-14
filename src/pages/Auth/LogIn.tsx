@@ -15,6 +15,7 @@ import { loginWithEmailPassword } from "../../database/users/auth";
 import SuccessMessage from "../../components/ui/SuccessMessage";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import useUser from "../../store/userStore";
+import { toast } from "react-toastify";
 
 
 const LogIn = () => {
@@ -52,10 +53,10 @@ const LogIn = () => {
     } catch (error) {
       if(error instanceof FirebaseError){
         if(error.code === "auth/invalid-credential"){
-          setError("root", {message: "Wrong Email or Password"});
+          toast.error("Email or Password Wrong!")
         }
       }else{
-        setError("root", {message: "Something Went Wrong"})
+        toast.error("Somthing Went Wrong!")
       }
     }finally{
       setLoading(false);
