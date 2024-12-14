@@ -29,7 +29,7 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
         if(user){
             Promise.resolve(addToChatList(user.uid, match.user.uid))
             .then(()=>setAdded(true))
-            .catch((err)=>toast.error("Somthing Went Wrong!"))
+            .catch(()=>toast.error("Somthing Went Wrong!"))
             .finally(()=>setLoading(false));
         }
     }
@@ -43,7 +43,12 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
                 height={10}
                 width={10}
             />
-            <div className="logo-font">{match.user.username}</div>
+            <Link
+                to={`/profile/${match.user.uid}`}
+                className="logo-font hover:bg-blue-500 hover:underline"
+            >
+                {match.user.username}
+            </Link>
         </div>
         {
             (match.matches.ageMatch || match.matches.occupationMatch || match.matches.genderMatch) &&

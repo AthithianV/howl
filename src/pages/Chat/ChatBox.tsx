@@ -16,7 +16,7 @@ const ChatBox = () => {
 
   const { userId } = useParams();
   const {user} = useUser();
-  const {selectedChat, setChat} = useChat();
+  const { setChat} = useChat();
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [loader, setLoader] = useState(false);
 
@@ -26,7 +26,7 @@ const ChatBox = () => {
             setChat(userId);
             Promise.resolve(getMessages(user.uid, userId))
             .then((res:MessageType[])=>setMessages(res))
-            .catch((err)=>toast.error("Something Went Wrong"))
+            .catch(()=>toast.error("Something Went Wrong"))
             .finally(()=>setLoader(false));
         }
     }, [userId]);

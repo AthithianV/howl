@@ -44,7 +44,7 @@ export const loginWithEmailPassword = async ( email:string, password: string) =>
 }
 
 export const signOutInt = async () =>{
-    signOut(auth).catch((error) => {
+    signOut(auth).catch(() => {
         throw new Error("Error Occured while signing out!!!");
     });
 } 

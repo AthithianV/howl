@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useChat from "../../store/chatStore";
-import ImageContainer from "../ui/ImageContainer";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";

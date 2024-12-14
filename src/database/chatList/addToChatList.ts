@@ -1,6 +1,5 @@
-import { addDoc, arrayUnion, collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { arrayUnion, collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import db from "../firebase";
-import { RefType } from "../../types/profile";
 import { ChatListType } from "../../types/chatlist";
 
 async function addUsers(uid1:string, uid2:string){

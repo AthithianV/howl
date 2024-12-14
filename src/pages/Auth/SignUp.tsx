@@ -9,7 +9,7 @@ import { FirebaseError } from "firebase/app";
 import { SignUpSchema } from "../../validation/signup";
 import FormElementWrapper from "../../components/ui/FormElementWrapper";
 import Brand from "../../components/Brand";
-import googleIcon from "../assets/icons/google.svg";
+// import googleIcon from "../assets/icons/google.svg";
 import SuccessMessage from "../../components/ui/SuccessMessage";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import { signupWithEmailPassword } from "../../database/users/auth";
@@ -23,7 +23,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
 
-  const { register, handleSubmit, formState: {errors}, setError } = useForm({
+  const { register, handleSubmit, formState: {errors} } = useForm({
     defaultValues:{
       username: "",
       email: "",

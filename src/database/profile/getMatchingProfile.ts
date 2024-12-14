@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import db from "../firebase";
-import { MatchDocType, MatchedUser, MatchType } from "../../types/match";
+import { MatchDocType, MatchedUser } from "../../types/match";
 import { UserType } from "../../types/user";
 import { ProfileType } from "../../types/profile";
 

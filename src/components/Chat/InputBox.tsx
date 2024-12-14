@@ -6,7 +6,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { sendMessage } from '../../database/chatList/sendMessage';
 import { Discuss } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
-import { Bounce, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const InputBox = () => {
 

@@ -2,7 +2,7 @@ import { getUserData } from "../users/GetUserData";
 import { getUsersWithMatchingProfile } from "../../util/profiles/GetUsersWithMatchingProfiles";
 import { RefType } from "../../types/profile";
 import { getUsersWithMatchingInterests } from "../../util/profiles/GetUsersWithMatchingInterests";
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import db from "../firebase";
 import { MatchDocType } from "../../types/match";
 import findCommonInterests from "../../util/profiles/findCommonInterest";
@@ -11,7 +11,7 @@ import findCommonInterests from "../../util/profiles/findCommonInterest";
 
 export const matchProfile = async (uid:string)=>{
     try {
-        const {user, profile, interest, personality} = await getUserData(doc(db, 'users', uid));
+        const {user, profile, interest} = await getUserData(doc(db, 'users', uid));
 
         let matches:RefType[] = [];
         if(profile){
@@ -38,10 +38,8 @@ export const matchProfile = async (uid:string)=>{
             }
 
             const {
-                user: matchedUser,
                 profile:matchedProfile,
                 interest: matchedInterest,
-                personality: matchedPersonality
             } = await getUserData(match);
 
             const matchData:MatchDocType = {

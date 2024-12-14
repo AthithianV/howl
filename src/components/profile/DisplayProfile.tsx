@@ -1,4 +1,3 @@
-import React from 'react'
 import { UserDataType } from '../../types/user'
 import ImageContainer from '../ui/ImageContainer'
 import ProfileName from '../ui/ProfileName'

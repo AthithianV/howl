@@ -27,7 +27,7 @@ const LogIn = () => {
   const [loginCompleted, setLoginCompleted] = useState(false);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, setError, formState: {errors} } = useForm({
+  const { register, handleSubmit, formState: {errors} } = useForm({
     defaultValues:{
       email: "",
       password: ""

@@ -8,8 +8,6 @@ import { ThreeDots } from "react-loader-spinner";
 
 import useUser from "../../store/userStore";
 import FormElementWrapper from "../ui/FormElementWrapper";
-import SuccessMessage from "../ui/SuccessMessage";
-import ErrorMessage from "../ui/ErrorMessage";
 import ProfilePicturePicker from "./ProfilePicturePicker";
 import { createProfile } from "../../database/profile/createProfile";
 import { ProfileFormSchema } from "../../validation/ProfileForm";
@@ -26,9 +24,8 @@ const ProfileForm = () => {
 
   const {user} = useUser();
   const navigate = useNavigate();
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, setError, setValue, formState: {errors} } = useForm({
+  const { register, handleSubmit, setValue, formState: {errors} } = useForm({
     defaultValues:{
       fullName: "",
       age: null,
@@ -53,6 +50,7 @@ const ProfileForm = () => {
         if(userData){
           Cookies.set("user", JSON.stringify(userData));
         }
+        toast.success("Profile Created Successfully!")
         navigate("/");
       }
     } catch (error) {
@@ -70,12 +68,6 @@ const ProfileForm = () => {
       </ProfileName>} */}
 
       <h1 className="text-center my-4 text-2xl font-bold">Create Your Profile</h1>
-
-      
-      <div className="flex-center">
-        {!errors.root?.message && success && <SuccessMessage message={success}/>}
-        {!success && errors.root?.message && <ErrorMessage message={errors.root.message}/>}
-      </div>
 
       <div>
         <FormElementWrapper label="Full Name" error={errors.fullName}>
