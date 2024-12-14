@@ -5,7 +5,7 @@ export type GroupType = {
     description: string,
     theme: string,
     members: string[],
-    id: RefType,
+    id: string,
     createdBy: string,
     createdAt: number
 }

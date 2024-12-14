@@ -4,7 +4,7 @@ import { UserGroupList } from "../../types/UserGroupList";
 
 export async function joinGroup(uid: string, groupId:string){
     try {
-        const userGroups = await getDocs(query(collection(db, 'groups'), where('uid', '==', doc(db, 'users', uid))));
+        const userGroups = await getDocs(query(collection(db, 'user_group_lists'), where('uid', '==', uid)));
         if(userGroups.empty){
             const groupList:UserGroupList = {
                 id: `${Date.now()}`,
@@ -15,6 +15,9 @@ export async function joinGroup(uid: string, groupId:string){
         }else{
             await updateDoc(doc(db, 'user_group_lists', userGroups.docs[0].id), {groups: arrayUnion(groupId)})
         }
+
+        const isGroupMember = await getDocs(query(collection(db, 'groups'), where('members', 'array-contains', [uid])));
+        
         
     } catch (error) {
         throw error;

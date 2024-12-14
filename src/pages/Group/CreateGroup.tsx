@@ -5,6 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { GroupFormSchema } from "../../validation/GroupForm";
 import { z } from "zod";
 import useUser from "../../store/userStore";
+import { toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
+import { createGroup } from "../../database/group.tsx/createGroup";
 
 const CreateGroup = () => {
 
@@ -23,7 +26,21 @@ const CreateGroup = () => {
   )
 
   async function onSubmit(data:z.infer<typeof GroupFormSchema>){
-      
+    if(user){
+      setLoader(true);
+      try {
+        await createGroup(data, user.uid)
+        toast.success("Group Created Successfully");
+      } catch (error) {
+        if(error instanceof Error && error.message==="Group Name Exists"){
+          toast.error(error.message);
+        }else{
+          toast.error("Something Went Wrong");
+        }
+      }finally{
+        setLoader(false);
+      }
+    }
   }
 
   return (
@@ -50,7 +67,12 @@ const CreateGroup = () => {
           </textarea>
         </FormElementWrapper>
         <div className="text-center mt-4">
-          <button type="submit" className="py-2 px-4 rounded bg-black font-semibold text-white">Submit</button>
+          <button type="submit" className="py-2 px-4 rounded bg-black font-semibold text-white">
+            {
+              loader?<ThreeDots color="white" height={30} width={30}/>
+              :<span>Submit</span>
+            }
+          </button>
         </div>
       </form>
     </div>
