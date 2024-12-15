@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import InputBox from '../../components/Chat/InputBox'
 import useChat from '../../store/chatStore';
 import useUser from '../../store/userStore';
-import { getMessages } from '../../database/chat.ts/getMessage';
+import { getMessages } from '../../database/chat/getMessage';
 import { MessageType } from '../../types/message';
 import { toast } from 'react-toastify';
 import LoaderWrapper from '../../components/ui/LoaderWrapper';
@@ -61,7 +61,7 @@ const ChatBox = () => {
             ))}
         </div>
       }
-      <InputBox/>
+      <InputBox messages={messages} setMessages={setMessages}/>
     </div>
   )
 }

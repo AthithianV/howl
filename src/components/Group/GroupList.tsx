@@ -61,7 +61,7 @@ const GroupList = () => {
                 {
                     groupList.map((group, index)=>(
                         <Link to={`/group/${group.id}`} key={index}>
-                        <GroupCard group={group} joined={userGroupList.includes(group.id)}/>
+                            <GroupCard group={group} joined={userGroupList.includes(group.id)}/>
                         </Link>
                     ))
                 } 

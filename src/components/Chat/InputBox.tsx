@@ -7,11 +7,17 @@ import { sendMessage } from '../../database/chatList/sendMessage';
 import { Discuss } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { MessageType } from '../../types/message';
 
-const InputBox = () => {
+type PropType = {
+    setMessages: React.Dispatch<React.SetStateAction<MessageType[]>>,
+    messages: MessageType[]
+}
+
+const InputBox = ({messages, setMessages}: PropType) => {
 
     const {user} = useUser();
-    const {selectedChat, setChat, promptText, setMessages, messages} = useChat();
+    const {selectedChat, setChat, promptText} = useChat();
     const [message, setMessage] = useState("");
     const [loader, setLoader] = useState(false);
 

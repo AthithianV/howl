@@ -9,7 +9,7 @@ const GroupCard = ({group, joined}:{group:GroupType, joined: boolean}) => {
   const [justJoined, setJustJoined] = useState(false);
   const {user} = useUser();
 
-  async function joinGroupAction(e:MouseEvent<HTMLButtonElement, MouseEvent>){
+  async function joinGroupAction(e:React.MouseEvent<HTMLButtonElement>){
     e.preventDefault(); 
     e.stopPropagation();
     try {

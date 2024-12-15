@@ -18,6 +18,7 @@ const GroupChatBox = () => {
   useEffect(()=>{
     if(groupId){
       setLoader(true);
+      Promise.resolve()
       Promise.resolve(getGroupMessages(groupId))
       .then((res)=>setMessages(res))
       .catch(()=>toast.error("Something Went Wrong"))
