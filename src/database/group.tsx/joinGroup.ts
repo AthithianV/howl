@@ -16,8 +16,11 @@ export async function joinGroup(uid: string, groupId:string){
             await updateDoc(doc(db, 'user_group_lists', userGroups.docs[0].id), {groups: arrayUnion(groupId)})
         }
 
-        const isGroupMember = await getDocs(query(collection(db, 'groups'), where('members', 'array-contains', [uid])));
-        
+        const isGroupMember = await getDocs(query(collection(db, 'groups'), where('members', 'array-contains', uid)));
+        if(isGroupMember.empty){
+            await updateDoc(doc(db, 'groups', groupId), {members: arrayUnion(uid)});
+        }
+
         
     } catch (error) {
         throw error;

@@ -17,7 +17,6 @@ type Action = {
     setChatList: (chatList:State["chatList"])=> void,
     setChat: (chat:State["selectedChat"])=> void,
     setMessages: (messages:State["messages"])=> void,
-    addMessage: (message: State["message"])=>void,
     setPromptDisplay: (message: State["displayPrompt"])=>void,
     setPromptText: (prompt:State["promptText"])=> void,
 
@@ -31,13 +30,6 @@ const useChat  = create<State & Action>((set)=>({
     messages: [],
     message: null,
     setMessages: (messages)=>set(()=>({messages})),
-    addMessage: (message) => set((state)=>{
-        if(message)
-            return {messages: [...state.messages, message]};
-        else{
-            return {messages: state.messages};
-        }
-    }),
     displayPrompt: true,
     setPromptDisplay: (view)=>set(()=>({displayPrompt: view})),
     promptText: "",

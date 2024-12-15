@@ -1,41 +1,34 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useUser from '../../store/userStore'
-import useChat from '../../store/chatStore';
-import { FormEvent, useEffect, useState } from 'react';
-import { sendMessage } from '../../database/chatList/sendMessage';
+import { FormEvent, useState } from 'react';
 import { Discuss } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { addGroupMessage } from '../../database/group.tsx/addGroupMessage';
+import { GroupMessageType } from '../../types/groupMessage';
 
-const InputBox = () => {
+type PropType = {
+    messages: GroupMessageType[],
+    setMessages: React.Dispatch<React.SetStateAction<GroupMessageType[]>>
+}
+
+const GroupInputBox = ({messages, setMessages}:PropType) => {
 
     const {user} = useUser();
-    const {selectedChat, setChat, promptText, setMessages, messages} = useChat();
     const [message, setMessage] = useState("");
     const [loader, setLoader] = useState(false);
 
-    const { userId } = useParams();
-
-    useEffect(()=>{
-        if(userId)  
-            setChat(userId);
-    }, [])
-
-    useEffect(()=>{
-        if(promptText){
-            setMessage(promptText);
-        }
-    }, [promptText])
+    const { groupId } = useParams();
 
     const handleSubmission = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoader(true);
         try {
-            if(selectedChat && user){
-                const messageDoc = await sendMessage(message, user.uid, selectedChat);
-                setMessages([...messages, messageDoc]);
+            if(groupId && user){
+                const newMessage = await addGroupMessage(message, user, groupId);
                 setMessage("");
+                setMessages([...messages, newMessage])
             }
         } catch (error) {
             toast.error("Somthing Went Wrong!");
@@ -76,4 +69,4 @@ const InputBox = () => {
   )
 }
 
-export default InputBox;
+export default GroupInputBox;

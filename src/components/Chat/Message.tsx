@@ -1,4 +1,5 @@
 
+
 type PropType = {
     text: string,
     time:number,

@@ -23,7 +23,7 @@ const Sidebar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [completeSignOut, setCompleteSignOut] = useState(false);
-    const {setChat} = useChat();
+    const {setChat, setChatList} = useChat();
 
     function activeLink(path:string){
         if(
@@ -47,6 +47,7 @@ const Sidebar = () => {
     const signout = async ()=>{
         Cookies.remove("user");
         setCompleteSignOut(true);
+        setChatList([]);
     }
 
   return (

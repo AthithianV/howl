@@ -60,9 +60,9 @@ const GroupList = () => {
                 <div className="flex flex-wrap gap-2">
                 {
                     groupList.map((group, index)=>(
-                        <div key={index}>
+                        <Link to={`/group/${group.id}`} key={index}>
                         <GroupCard group={group} joined={userGroupList.includes(group.id)}/>
-                        </div>
+                        </Link>
                     ))
                 } 
                 </div>  
