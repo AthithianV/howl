@@ -32,7 +32,7 @@ const InputBox = ({messages, setMessages}: PropType) => {
         if(promptText){
             setMessage(promptText);
         }
-    }, [promptText])
+    }, [promptText]);
 
     const handleSubmission = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();

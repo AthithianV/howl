@@ -58,10 +58,10 @@ const Home = () => {
       <div className="flex justify-end">
         <Link to="/howl" className="font-semibold text-md text-blue-600 underline">Find More Matches</Link>
       </div>
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-12 gap-4">
       {
         matches.map((match, index)=>(
-          <div  key={index} className="py-2 px-10 shadow-md rounded-md border bg-slate-100 w-[400px]">
+          <div  key={index} className="py-2 px-10 shadow-md rounded-md border bg-slate-100 col-span-4 max-lg:col-span-6 max-md:col-span-12">
             <MatchCard match={match} index={index}/>
           </div>
           )

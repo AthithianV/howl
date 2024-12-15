@@ -22,7 +22,7 @@ const Message = ({text, time, user}:PropType) => {
     
 
   return (
-        <div className={`h-fit w-fit min-w-4 py-1 px-2 rounded-md flex flex-col gap-2 shadow border-[0.4px] max-w-[300px] ${user?"items-end bg-sky-400 text-white":""}`}>
+        <div className={`h-fit w-fit min-w-4 py-1 px-2 rounded-md flex flex-col gap-2 shadow border-[0.4px] max-w-[300px] max-sm:max-w-[200px] ${user?"items-end bg-sky-400 text-white":""}`}>
             <span>{text}</span>
             <span className="text-[0.6rem] self-end font-bold">{formatTime(time)}</span>
         </div>

@@ -9,8 +9,9 @@ import { ThreeDots } from "react-loader-spinner";
 import { theme } from "../../util/theme";
 import { getPrompts } from "../../util/chats/getPrompts";
 import { toast } from "react-toastify";
+import { MessageType } from "../../types/message";
 
-const PromptBox = () => {
+const PromptBox = ({messages}:{messages:MessageType[]}) => {
 
   const {setPromptDisplay, displayPrompt, setPromptText } = useChat();
   const [prompts, setPrompts] = useState<string[]>([]);
@@ -19,7 +20,7 @@ const PromptBox = () => {
   const [loader, setLoader] = useState(false);
 
   useEffect(()=>{
-    if(userId && user && prompts.length===0){
+    if(userId && user && prompts.length===0 && messages.length===0){
       setLoader(true);
       Promise.resolve(getPrompts(user.uid, userId))
       .then((res)=>setPrompts(res.split('/')))

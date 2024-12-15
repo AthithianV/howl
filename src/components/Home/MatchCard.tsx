@@ -49,7 +49,7 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
             />
             <Link
                 to={`/profile/${match.user.uid}`}
-                className="logo-font hover:bg-blue-500 hover:underline"
+                className="logo-font hover:text-blue-500 hover:underline"
             >
                 {match.user.username}
             </Link>

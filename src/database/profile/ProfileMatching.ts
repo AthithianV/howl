@@ -2,7 +2,7 @@ import { getUserData } from "../users/GetUserData";
 import { getUsersWithMatchingProfile } from "../../util/profiles/GetUsersWithMatchingProfiles";
 import { RefType } from "../../types/profile";
 import { getUsersWithMatchingInterests } from "../../util/profiles/GetUsersWithMatchingInterests";
-import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { and, collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import db from "../firebase";
 import { MatchDocType } from "../../types/match";
 import findCommonInterests from "../../util/profiles/findCommonInterest";
@@ -28,11 +28,20 @@ export const matchProfile = async (uid:string)=>{
                     matches.push(match);
                 }
             });
-        }
+        }        
 
         const matchIds = await Promise.all(matches.map(async (match:RefType)=>{
             
-            const checkMatchedExistence = await getDocs(query(collection(db, "matches"), where("matchedUid", "==", match)))
+            const checkMatchedExistence = await getDocs(
+                query(
+                    collection(db, "matches"), 
+                    and(
+                        where("matchedUid", "==", match),
+                        where("uid", "==", doc(db, 'users', uid))
+                    )
+                )
+            )
+
             if(!checkMatchedExistence.empty){
                 return null;
             }
@@ -55,6 +64,7 @@ export const matchProfile = async (uid:string)=>{
                 matchedUid: match,
                 uid: profile.uid,
             }
+            
             await setDoc(doc(db, 'matches', matchData.id), matchData);
             return matchData.id;
         }))
@@ -72,6 +82,8 @@ export const matchProfile = async (uid:string)=>{
         return {matchCount, user: {...user, matchedProfileCount: user.matchedProfileCount+matchCount}};
         
     } catch (error) {
+        console.log(error);
+        
         throw error;
     }
 } 

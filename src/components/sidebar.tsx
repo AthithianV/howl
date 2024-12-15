@@ -51,7 +51,7 @@ const Sidebar = () => {
     }
 
   return (
-    <nav className='h-full bg-slate-200 flex flex-col justify-between p-2'>
+    <nav className='h-full bg-slate-200 flex flex-col justify-between p-2 border-e-2 border-slate-50'>
         <div>
             <div className="hidden max-md:block py-2 border-b-2 border-white mb-2">
                 <BrandImg/>

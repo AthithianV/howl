@@ -25,7 +25,7 @@ const ChatListBox = () => {
     }, [selectedChat])
 
   return (
-    <div className="w-fit h-screen flex flex-col p-4 border-s-[1px] border-e-[1px] border-gray-400 ">
+    <div className={`w-fit h-screen flex flex-col p-4 border-s-[1px] border-e-[1px] border-gray-400 ${userId?"max-md:hidden":"max-md:w-full"}`}>
         <div className="mb-4 p-2 border-b-2 border-sky-400 bg-white rounded flex gap-2 items-center">
             <FontAwesomeIcon icon={faSearch}/>
             <input type="text" className="bg-transparent focus:outline-none"/>

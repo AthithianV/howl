@@ -6,7 +6,7 @@ import { getChatList } from "../../database/chatList/getChatList";
 import useUser from "../../store/userStore";
 import LoaderWrapper from "../../components/ui/LoaderWrapper";
 import { ThreeDots } from "react-loader-spinner";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Chat = () => {
@@ -14,6 +14,14 @@ const Chat = () => {
   const {chatList, setChatList, selectedChat, setChat} = useChat();
   const {user} = useUser();
   const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(user && !user.hasProfile){
+      toast.error("Create Profile to continue");
+      navigate("/profile/create-profile");
+    }
+  }, [])
     
   useEffect(()=>{
       if(user && chatList.length===0){
@@ -37,8 +45,10 @@ const Chat = () => {
         <div className="flex-1 overflow-auto h-screen">
           {
             !selectedChat
-            ?<div className="flex-center">
-              <img src="/chat-box-poster.svg" alt="Wolf Howling" className="h-[600px]"/>
+            ?<div className="flex-center h-screen">
+              {
+                <img src="/chat-box-poster.svg" alt="Wolf Howling" className="h-[600px]"/>
+              }
             </div>
             :<Outlet/>
           }
