@@ -4,12 +4,9 @@ import { GroupMessageType } from "../../types/groupMessage";
 
 const getGroupMessages = async (groupId:string) => {
   try{
-    console.log(groupId);
-    
     const groupMessageSnap = await getDocs(query(collection(db, 'group_messages'), where('groupId', '==', groupId)));
     const groupMessages:GroupMessageType[] =[];
     groupMessageSnap.forEach(message=>groupMessages.push(message.data() as GroupMessageType));
-    console.log(groupMessages);
     return groupMessages;
   }catch(err){
     console.log(err);

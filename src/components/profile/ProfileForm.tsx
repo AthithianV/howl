@@ -2,14 +2,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 
 import useUser from "../../store/userStore";
 import FormElementWrapper from "../ui/FormElementWrapper";
 import ProfilePicturePicker from "./ProfilePicturePicker";
-import { createProfile } from "../../database/profile/createProfile";
+import { createProfile } from "../../database/profile/CreateProfile";
 import { ProfileFormSchema } from "../../validation/ProfileForm";
 import { toast } from "react-toastify";
 
@@ -138,6 +137,15 @@ const ProfileForm = () => {
             {...register("movies")}/>
           <InterestInfo interest={"Movies"}/>
         </FormElementWrapper>
+
+        <FormElementWrapper label="Foods" error={errors.movies}>
+          <input
+            type="text"
+            className={`input border border-black py-3 px-3 my-1 peer ${errors.foods?'border-red-500':""}`}
+            {...register("foods")}/>
+          <InterestInfo interest={"Foods"}/>
+        </FormElementWrapper>
+
       </div>
 
       <div className="flex-center">

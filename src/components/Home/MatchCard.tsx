@@ -59,7 +59,7 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
             <div className="flex flex-col border-b-2  gap-2 py-2 my-2">
                 <h1 className="font-semibold underline">Profile Matches: </h1>
                     <div>
-                        <span className="font-semibold">Age:</span> 
+                        <span className="font-semibold">Age: </span> 
                         {
                             match.matches.ageMatch
                             ?<span>{match.profile.age}</span>
@@ -67,15 +67,15 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
                         }
                     </div>
                     <div>
-                        <span className="font-semibold">Occupation:</span> 
+                        <span className="font-semibold">Occupation: </span> 
                         {match.matches.occupationMatch
                         ?<span>{match.profile.occupation}</span>
                         :<span>N/A</span>}
                     </div>
                     <div>
-                        <span className="font-semibold">Gender:</span> 
+                        <span className="font-semibold">Gender: </span> 
                         {match.matches.genderMatch
-                        ?<span>{match.profile.occupation}</span>
+                        ?<span>{match.profile.gender}</span>
                         :<span>N/A</span>}
                     </div>
             </div>

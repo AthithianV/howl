@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import { GroupType } from '../../types/group'
 import { toast } from 'react-toastify';
 import { joinGroup } from '../../database/group.tsx/joinGroup';

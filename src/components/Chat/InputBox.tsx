@@ -17,7 +17,7 @@ type PropType = {
 const InputBox = ({messages, setMessages}: PropType) => {
 
     const {user} = useUser();
-    const {selectedChat, setChat, promptText} = useChat();
+    const {selectedChat, setChat, promptText, setPromptText} = useChat();
     const [message, setMessage] = useState("");
     const [loader, setLoader] = useState(false);
 
@@ -42,6 +42,7 @@ const InputBox = ({messages, setMessages}: PropType) => {
                 const messageDoc = await sendMessage(message, user.uid, selectedChat);
                 setMessages([...messages, messageDoc]);
                 setMessage("");
+                setPromptText("");
             }
         } catch (error) {
             toast.error("Somthing Went Wrong!");

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 import useUser from "../../store/userStore";
@@ -15,8 +14,6 @@ const Howl = () => {
     const [finishedMatching, setFinishedMatching] = useState(false);
 
     useEffect(()=>{
-        console.log(finishedMatching);
-        
         if(finishedMatching){
             navigate("/");
             setFinishedMatching(false);

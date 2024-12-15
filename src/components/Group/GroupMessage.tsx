@@ -22,7 +22,7 @@ const Message = ({text, time, user, name, picture}:PropType) => {
     
 
   return (
-        <div className={`h-fit w-fit min-w-4 p-2 rounded-md flex flex-col shadow border-[0.4px] max-w-[300px] ${user?"items-end bg-sky-400 text-white":""}`}>
+        <div className={`h-fit w-fit min-w-4 p-2 my-1 rounded-md flex flex-col shadow border-[0.4px] max-w-[300px] ${user?"items-end bg-sky-400 text-white":""}`}>
             <div className="flex gap-2">
               {!user && <div>
                 <img src={picture} alt={name} className="h-8 w-8 rounded"/>

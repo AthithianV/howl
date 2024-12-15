@@ -13,8 +13,6 @@ import Message from '../../components/Chat/Message';
 import PromptBox from '../../components/Chat/PromptBox';
 import { getProfile } from '../../database/profile/getProfile';
 import { ProfileType } from '../../types/profile';
-import ImageContainer from '../../components/ui/ImageContainer';
-
 
 const ChatBox = () => {
 

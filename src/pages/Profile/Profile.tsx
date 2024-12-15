@@ -14,6 +14,12 @@ const Profile = () => {
     }
   })
 
+  useEffect(()=>{
+    if(user && !user.hasProfile){
+      navigate("/profile/create-profile");
+    }
+  }, [user])
+
   return (
     <div className='w-full h-screen overflow-auto box-border'>
       <Outlet/>
