@@ -3,6 +3,7 @@ import { GroupType } from '../../types/group'
 import { toast } from 'react-toastify';
 import { joinGroup } from '../../database/group.tsx/joinGroup';
 import useUser from '../../store/userStore';
+import { Link } from 'react-router-dom';
 
 const GroupCard = ({group, joined}:{group:GroupType, joined: boolean}) => {
 
@@ -29,11 +30,11 @@ const GroupCard = ({group, joined}:{group:GroupType, joined: boolean}) => {
             <span className="font-semibold text-xs bg-red-500 text-white rounded px-1 py-[0.2px] w-fit">{group.theme}</span>
         </div>
         {
-            (joined || justJoined) ?<span className='py-1 px-2 rounded text-white bg-stone-300'>Joined</span>
+            (joined || justJoined) ?<Link to={`/group/${group.id}`} className='py-1 px-2 rounded text-white bg-sky-400'>Open Chat</Link>
             :<button onClick={(e)=>joinGroupAction(e)} className='bg-black text-white h-fit py-1 px-2 rounded'>Join</button>
         }
     </div>
   )
 }
 
-export default GroupCard
+export default GroupCard;
