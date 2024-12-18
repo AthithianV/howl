@@ -28,7 +28,7 @@ export async function getPrompts(senderId: string, receiverId: string) {
 
   try {
 
-    const apiKey = "AIzaSyClpgt9R39gthNCHVvECxpYz-qcgZnmcIM";
+    const apiKey = "";
     
     if (!apiKey) {
         throw new Error("GEMINI_API_KEY is not set in environment variables.");
