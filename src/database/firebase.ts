@@ -6,7 +6,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA7932kRvtnwWPhXLyZ8IN30alnvrq6CAA",
+  apiKey: "",
   authDomain: "introtalk-d1653.firebaseapp.com",
   projectId: "introtalk-d1653",
   storageBucket: "introtalk-d1653.firebasestorage.app",
