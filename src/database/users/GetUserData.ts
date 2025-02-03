@@ -33,7 +33,6 @@ export async function getUserData(userRef:RefType){
 
         return populatedData;
     } catch (error) {
-        console.log("Getting User Data:"+ JSON.stringify(error));
         throw error;
     }
 }

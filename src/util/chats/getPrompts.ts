@@ -75,9 +75,6 @@ export async function getPrompts(senderId: string, receiverId: string) {
       throw new Error("Gemini API returned no content.");
     }
 
-    console.log(content);
-    
-
     return content;
   } catch (error) {
     console.error("Error generating prompts:", error);

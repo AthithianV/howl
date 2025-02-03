@@ -31,9 +31,6 @@ const GroupList = () => {
             .then((res)=>setUserGroupList(res))
             .catch(()=>toast.error("Something Went wrong!"))
         }
-        console.log(groupList);
-        console.log(userGroupList);
-        
     }, [user])
 
 

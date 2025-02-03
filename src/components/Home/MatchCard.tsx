@@ -20,10 +20,6 @@ const MatchCard = ({match}:{index:number, match:MatchedUser}) => {
     const {chatList} = useChat();
 
     useEffect(()=>{
-        console.log(chatList);
-        console.log(match.user.uid);
-        
-        
         if(chatList.some(chat=>chat.user.uid === match.user.uid))
             setAdded(true);
     }, [chatList])

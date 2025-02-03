@@ -1,13 +1,14 @@
 // Import the functions you need from the SDKs you need
+import { getFirestore } from "firebase/firestore";// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyA7932kRvtnwWPhXLyZ8IN30alnvrq6CAA",
   authDomain: "introtalk-d1653.firebaseapp.com",
+  databaseURL: "https://introtalk-d1653-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "introtalk-d1653",
   storageBucket: "introtalk-d1653.firebasestorage.app",
   messagingSenderId: "19562086941",
