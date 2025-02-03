@@ -24,11 +24,13 @@ const PromptBox = ({messages}:{messages:MessageType[]}) => {
       setLoader(true);
       Promise.resolve(getPrompts(user.uid, userId))
       .then((res)=>setPrompts(res.split('/')))
-      .catch((err)=>{
-        console.log(err);
-        toast.error("Something went Wrong")
+      .catch(()=>{
+        toast.error("Gemini Quota Exceeded");
       })
-      .finally(()=>setLoader(false));
+      .finally(()=>{
+        setLoader(false);
+        setPromptDisplay(false);
+      });
     }
   }, [userId, user])
 

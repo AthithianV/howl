@@ -28,7 +28,7 @@ export async function getPrompts(senderId: string, receiverId: string) {
 
   try {
 
-    const apiKey = "";
+    const apiKey = "AIzaSyClpgt9R39gthNCHVvECxpYz-qcgZnmcIM";
     
     if (!apiKey) {
         throw new Error("GEMINI_API_KEY is not set in environment variables.");
@@ -77,7 +77,6 @@ export async function getPrompts(senderId: string, receiverId: string) {
 
     return content;
   } catch (error) {
-    console.error("Error generating prompts:", error);
     throw new Error(`Failed to generate conversation prompts`);
   }
 }
